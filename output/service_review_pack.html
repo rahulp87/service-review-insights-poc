@@ -1,0 +1,1185 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Group Contact Centre — Quarterly Service Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root{
+    --paper:#fbfaf8; --surface:#ffffff; --surface-2:#f4f2ec;
+    --ink:#1b2230; --ink-soft:#59616f; --ink-faint:#8b909b;
+    --rule:#e5e2da; --rule-strong:#d3cfc4;
+    --accent:#0e7c7b; --accent-deep:#0b5c5b;
+    --g:#2f8f5b; --g-bg:#e8f2ea;
+    --a:#bd7f16; --a-bg:#f7efdd;
+    --r:#c0392f; --r-bg:#f7e4e2;
+    --shadow:0 1px 2px rgba(20,25,35,.04), 0 8px 24px -12px rgba(20,25,35,.10);
+    --maxw:70rem;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#14171d; --surface:#1b1f27; --surface-2:#20242d;
+      --ink:#e9eaee; --ink-soft:#a6adb8; --ink-faint:#767d89;
+      --rule:#2a2f39; --rule-strong:#3a4051;
+      --accent:#3ba3a0; --accent-deep:#4fb6b2;
+      --g:#4caf7a; --g-bg:#182a22;
+      --a:#d69f45; --a-bg:#2c2416;
+      --r:#d9635a; --r-bg:#2e1c1b;
+      --shadow:0 1px 2px rgba(0,0,0,.3), 0 10px 30px -14px rgba(0,0,0,.55);
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#14171d; --surface:#1b1f27; --surface-2:#20242d;
+    --ink:#e9eaee; --ink-soft:#a6adb8; --ink-faint:#767d89;
+    --rule:#2a2f39; --rule-strong:#3a4051;
+    --accent:#3ba3a0; --accent-deep:#4fb6b2;
+    --g:#4caf7a; --g-bg:#182a22;
+    --a:#d69f45; --a-bg:#2c2416;
+    --r:#d9635a; --r-bg:#2e1c1b;
+    --shadow:0 1px 2px rgba(0,0,0,.3), 0 10px 30px -14px rgba(0,0,0,.55);
+  }
+
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:"Libre Franklin", system-ui, -apple-system, "Segoe UI", sans-serif;
+    font-size:15px; line-height:1.62; -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 clamp(18px,4vw,44px) 96px}
+  h1,h2,h3,h4{margin:0; font-weight:600; text-wrap:balance; letter-spacing:-.01em}
+  p{margin:0}
+  a{color:var(--accent); text-decoration:none}
+  a:hover{text-decoration:underline}
+  strong{font-weight:600}
+  .mono{font-family:"IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace}
+  .num{font-variant-numeric:tabular-nums}
+
+  /* ---------- cover ---------- */
+  .cover{
+    padding:56px 0 30px; border-bottom:2px solid var(--ink);
+    margin-bottom:8px;
+  }
+  .eyebrow{
+    font-size:11.5px; font-weight:600; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--accent-deep);
+  }
+  .cover h1{
+    font-family:"Newsreader", Georgia, serif; font-weight:500;
+    font-size:clamp(30px,5vw,44px); line-height:1.1; margin:14px 0 18px;
+    letter-spacing:-.015em;
+  }
+  .cover-meta{
+    display:flex; flex-wrap:wrap; gap:6px 34px; font-size:13px; color:var(--ink-soft);
+  }
+  .cover-meta b{color:var(--ink); font-weight:600}
+  .cover-meta .k{
+    font-size:10.5px; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--ink-faint); display:block; margin-bottom:1px;
+  }
+
+  /* ---------- status strip ---------- */
+  .statusstrip{
+    display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:1px;
+    background:var(--rule); border:1px solid var(--rule); border-radius:10px;
+    overflow:hidden; margin:26px 0 8px;
+  }
+  @media (max-width:720px){.statusstrip{grid-template-columns:repeat(2,1fr)}}
+  .stat{background:var(--surface); padding:13px 15px}
+  .stat .k{font-size:10px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-faint); line-height:1.25}
+  .stat .v{font-family:"IBM Plex Mono",monospace; font-size:19px; font-weight:500; margin-top:5px; letter-spacing:-.02em}
+  .stat .d{font-size:11px; margin-top:5px; color:var(--ink-soft); display:flex; flex-wrap:wrap; gap:4px 6px; align-items:center}
+  .stat .d .sep{flex-basis:100%; height:0}
+  .fav{color:var(--g)} .adv{color:var(--r)}
+
+  /* ---------- sections ---------- */
+  section{margin-top:52px; scroll-margin-top:20px}
+  .sec-head{display:flex; align-items:baseline; gap:8px 14px; margin-bottom:18px; flex-wrap:wrap}
+  .sec-no{
+    font-family:"IBM Plex Mono",monospace; font-size:12px; font-weight:600;
+    color:var(--accent-deep); border:1px solid var(--accent); border-radius:5px;
+    padding:2px 7px; flex:none;
+  }
+  .sec-head h2{font-size:19px; letter-spacing:-.015em}
+  .sec-head .sub{color:var(--ink-faint); font-size:12.5px; margin-left:auto; text-align:right}
+
+  /* ---------- exec summary ---------- */
+  .bottomline{
+    font-family:"Newsreader", Georgia, serif; font-size:19px; line-height:1.5;
+    border-left:3px solid var(--accent); padding:6px 0 6px 20px; margin-bottom:22px;
+    color:var(--ink);
+  }
+  .prose{max-width:40rem}
+  .prose p{font-family:"Newsreader", Georgia, serif; font-size:15.5px; line-height:1.68; margin-bottom:12px; color:var(--ink)}
+  .prose p strong{font-family:"Libre Franklin",sans-serif; font-size:14px}
+  .changes{
+    margin-top:20px; border-top:1px solid var(--rule); padding-top:16px;
+    display:grid; gap:8px;
+  }
+  .changes .lbl{font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:2px}
+  .chg{display:flex; gap:10px; align-items:baseline; font-size:13px}
+  .chg .dot{width:7px; height:7px; border-radius:50%; flex:none; margin-top:5px}
+  .chg.up .dot{background:var(--g)} .chg.down .dot{background:var(--r)} .chg.flat .dot{background:var(--ink-faint)}
+
+  /* ---------- scorecard table ---------- */
+  .tablecard{border:1px solid var(--rule); border-radius:10px; overflow:hidden; box-shadow:var(--shadow)}
+  .scroll-x{overflow-x:auto}
+  table{border-collapse:collapse; width:100%; font-size:12.5px}
+  thead th{
+    background:var(--surface-2); text-align:right; font-weight:600; font-size:9.5px;
+    letter-spacing:.05em; text-transform:uppercase; color:var(--ink-soft);
+    padding:9px 9px; border-bottom:1px solid var(--rule-strong); white-space:nowrap;
+  }
+  thead th:first-child, tbody td:first-child{text-align:left}
+  tbody td{padding:9px 9px; text-align:right; border-bottom:1px solid var(--rule); white-space:nowrap}
+  tbody td.strong{color:var(--ink); font-weight:600}
+  tbody td.muted{color:var(--ink-faint)}
+  tbody tr:last-child td{border-bottom:0}
+  tbody tr:hover td{background:var(--surface-2)}
+  tbody td:first-child{white-space:normal; width:32%; line-height:1.3; padding-left:12px}
+  thead th:first-child{padding-left:12px}
+  .kpi-name{font-weight:600; color:var(--ink)}
+  .kpi-cat{display:block; font-size:10px; font-weight:500; color:var(--ink-faint); letter-spacing:.02em; text-transform:none; margin-top:1px}
+  .headline-row td:first-child .kpi-name::before{
+    content:""; display:inline-block; width:6px; height:6px; border-radius:50%;
+    background:var(--accent); margin-right:7px; vertical-align:middle;
+  }
+  .spark{display:block; color:var(--ink-faint)}
+  td .spark{margin-left:auto}
+  .chip{
+    display:inline-block; min-width:54px; text-align:center; font-family:"IBM Plex Mono",monospace;
+    font-size:10px; font-weight:600; padding:3px 7px; border-radius:999px; letter-spacing:.03em;
+  }
+  .chip.green{background:var(--g-bg); color:var(--g)}
+  .chip.amber{background:var(--a-bg); color:var(--a)}
+  .chip.red{background:var(--r-bg); color:var(--r)}
+  .chip.grey{background:var(--surface-2); color:var(--ink-faint)}
+  .delta.fav{color:var(--g)} .delta.adv{color:var(--r)} .delta.neutral{color:var(--ink-faint)}
+  .tg{font-size:11px; color:var(--ink-faint)}
+  .tg.improving{color:var(--g)} .tg.deteriorating{color:var(--r)}
+
+  /* ---------- headline charts ---------- */
+  .chartgrid{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:14px; margin-top:16px}
+  .chartcard{border:1px solid var(--rule); border-radius:10px; padding:14px 14px 8px; background:var(--surface)}
+  .chartcard .ch-h{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:6px}
+  .chartcard .ch-h .t{font-size:12px; font-weight:600; letter-spacing:.02em}
+  .chartcard .ch-h .v{font-family:"IBM Plex Mono",monospace; font-size:13px; font-weight:600}
+  .linechart{width:100%; height:auto; display:block}
+  .linechart .grid{stroke:var(--rule); stroke-width:1}
+  .linechart .ytick,.linechart .xtick{fill:var(--ink-faint); font-size:9px; font-family:"IBM Plex Mono",monospace}
+  .linechart .ref-target{stroke:var(--accent); stroke-width:1.2; stroke-dasharray:4 3; opacity:.8}
+  .linechart .ref-amber{stroke:var(--a); stroke-width:1; stroke-dasharray:2 3; opacity:.5}
+  .linechart .ref-label{fill:var(--accent); font-size:8.5px; font-family:"IBM Plex Mono",monospace}
+
+  /* ---------- BU cards ---------- */
+  .bugrid{display:grid; gap:16px}
+  .bucard{border:1px solid var(--rule); border-radius:12px; background:var(--surface); box-shadow:var(--shadow); overflow:hidden}
+  .bucard-top{display:flex; flex-wrap:wrap; gap:16px 22px; align-items:flex-start; padding:18px 20px; border-bottom:1px solid var(--rule)}
+  .bucard-top h3{font-size:16px; letter-spacing:-.01em}
+  .bu-verdict{font-size:11px; font-weight:600; letter-spacing:.06em; text-transform:uppercase; padding:3px 9px; border-radius:999px; margin-top:6px; display:inline-block}
+  .bu-verdict.escalate{background:var(--r-bg); color:var(--r)}
+  .bu-verdict.watch{background:var(--a-bg); color:var(--a)}
+  .bu-verdict.ontrack, .bu-verdict.ontrack-improving{background:var(--g-bg); color:var(--g)}
+  .bu-score{margin-left:auto; text-align:right; flex:none}
+  .bu-score .n{font-family:"IBM Plex Mono",monospace; font-size:26px; font-weight:600; letter-spacing:-.03em; display:block; line-height:1}
+  .bu-score .l{font-size:10px; letter-spacing:.09em; text-transform:uppercase; color:var(--ink-faint)}
+  .ragbar{display:block; margin-top:7px; border-radius:3px; overflow:hidden}
+  .bu-readout{padding:14px 20px 4px; font-size:13px; color:var(--ink-soft); max-width:44rem}
+  .bucard-body{display:grid; grid-template-columns:1.15fr 1fr; gap:8px 26px; padding:12px 20px 20px}
+  @media (max-width:720px){.bucard-body{grid-template-columns:1fr}}
+  .mini{display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--rule); border:1px solid var(--rule); border-radius:8px; overflow:hidden; align-self:start}
+  .mini .cell{background:var(--surface); padding:9px 11px; min-height:56px}
+  .mini .cell .l{font-size:9.5px; letter-spacing:.03em; text-transform:uppercase; color:var(--ink-faint); display:flex; justify-content:space-between; align-items:baseline; gap:6px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+  .mini .cell .row{display:flex; align-items:center; justify-content:space-between; gap:8px; margin-top:4px}
+  .mini .cell .val{font-family:"IBM Plex Mono",monospace; font-size:13.5px; font-weight:600; white-space:nowrap}
+  .mini .cell .val .wow{font-size:10px; font-weight:500; color:var(--ink-faint); margin-left:5px}
+  .dotb{width:7px; height:7px; border-radius:50%; flex:none}
+  .dotb.green{background:var(--g)} .dotb.amber{background:var(--a)} .dotb.red{background:var(--r)} .dotb.grey{background:var(--ink-faint)}
+  .bu-chart .cap{font-size:10.5px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:4px}
+
+  /* ---------- watch items ---------- */
+  .watchlist{display:grid; gap:1px; background:var(--rule); border:1px solid var(--rule); border-radius:10px; overflow:hidden}
+  .witem{background:var(--surface); padding:13px 16px 13px 18px; position:relative}
+  .witem::before{content:""; position:absolute; left:0; top:0; bottom:0; width:4px}
+  .witem.high::before{background:var(--r)}
+  .witem.medium::before{background:var(--a)}
+  .witem .wt{font-size:13px; font-weight:600}
+  .witem .wd{font-size:12px; color:var(--ink-soft); margin-top:3px}
+  .witem .sev{font-size:9.5px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; float:right; margin-left:12px}
+  .witem.high .sev{color:var(--r)} .witem.medium .sev{color:var(--a)}
+  .noflag{border:1px dashed var(--rule-strong); border-radius:10px; padding:16px; font-size:13px; color:var(--ink-soft)}
+
+  /* ---------- recommendations ---------- */
+  .recs{display:grid; gap:12px; counter-reset:rec}
+  .rec{border:1px solid var(--rule); border-radius:10px; padding:15px 18px; background:var(--surface); box-shadow:var(--shadow)}
+  .rec h4{font-size:14.5px; display:flex; gap:10px; align-items:baseline}
+  .rec h4::before{
+    counter-increment:rec; content:"R" counter(rec);
+    font-family:"IBM Plex Mono",monospace; font-size:11px; font-weight:600; color:var(--accent-deep);
+    border:1px solid var(--accent); border-radius:5px; padding:1px 6px; flex:none;
+  }
+  .rec p{font-size:12.5px; color:var(--ink-soft); margin:7px 0 10px}
+  .rec .meta{display:flex; flex-wrap:wrap; gap:8px}
+  .tag{font-size:10.5px; letter-spacing:.03em; background:var(--surface-2); color:var(--ink-soft); padding:3px 9px; border-radius:999px}
+  .tag b{color:var(--ink); font-weight:600}
+
+  /* ---------- appendix ---------- */
+  .defs{width:100%; border-collapse:collapse; font-size:12.5px; table-layout:fixed}
+  .defs th{text-align:left; font-size:10px; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-faint); padding:8px 12px; border-bottom:1px solid var(--rule-strong)}
+  .defs td{padding:10px 12px; border-bottom:1px solid var(--rule); vertical-align:top; white-space:normal; text-align:left; line-height:1.5}
+  .defs td:first-child{font-weight:600; color:var(--ink)}
+  .defs col.c-kpi{width:20%} .defs col.c-def{width:48%} .defs col.c-tgt{width:14%} .defs col.c-rag{width:18%}
+  .defs .tgt{font-family:"IBM Plex Mono",monospace; color:var(--ink-soft); font-size:11.5px}
+
+  /* ---------- footer ---------- */
+  .foot{margin-top:64px; padding-top:18px; border-top:1px solid var(--rule); font-size:11.5px; color:var(--ink-faint); display:flex; flex-wrap:wrap; gap:6px 20px; justify-content:space-between}
+
+  .toc{
+    display:flex; flex-wrap:wrap; gap:6px 18px; font-size:12px; margin:24px 0 4px;
+    color:var(--ink-soft);
+  }
+  .toc a{color:var(--ink-soft)}
+  .toc a:hover{color:var(--accent)}
+
+  @media (prefers-reduced-motion:no-preference){
+    a,.witem,tbody tr{transition:color .12s ease, background .12s ease}
+  }
+  @media print{
+    body{background:#fff; font-size:11px}
+    .wrap{max-width:none; padding:0}
+    .toc, .foot .gen{display:none}
+    section{page-break-inside:avoid; margin-top:26px}
+    .bucard, .rec, .chartcard{break-inside:avoid}
+    .tablecard, .bucard, .rec{box-shadow:none}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="cover">
+    <span class="eyebrow">Service Review &amp; Insights — Board Pack</span>
+    <h1>Group Contact Centre — Quarterly Service Review</h1>
+    <div class="cover-meta">
+      <span><span class="k">Reporting period</span><b>Q3 2026 (13 weeks to 27 Sep 2026)</b></span>
+      <span><span class="k">Prepared for</span><b>Group COO / Operations Board</b></span>
+      <span><span class="k">Prepared by</span><b>Service Review & Insights</b></span>
+      <span><span class="k">Units in scope</span><b>5 voice operations</b></span>
+      <span><span class="k">Contacts handled</span><b>631,924 this quarter</b></span>
+    </div>
+
+    <div class="statusstrip four">
+      
+      <div class="stat">
+        <div class="k">Group Service Level</div>
+        <div class="v num">77.8%</div>
+        <div class="d"><span class="adv">-5.9pt</span> vs qtr start<span class="sep"></span><span class="chip amber" style="min-width:0">AMBER</span></div>
+      </div>
+      <div class="stat">
+        <div class="k">Abandonment</div>
+        <div class="v num">5.8%</div>
+        <div class="d"><span class="adv">+1.2pt</span> vs qtr start<span class="sep"></span><span class="chip amber" style="min-width:0">AMBER</span></div>
+      </div>
+      <div class="stat">
+        <div class="k">CSAT</div>
+        <div class="v num">84.8%</div>
+        <div class="d"><span class="adv">-1.8pt</span> vs qtr start<span class="sep"></span><span class="chip amber" style="min-width:0">AMBER</span></div>
+      </div>
+      <div class="stat">
+        <div class="k">Cost / Contact</div>
+        <div class="v num">AED 20.01</div>
+        <div class="d"><span class="adv">+0.13</span> vs qtr start<span class="sep"></span><span class="chip amber" style="min-width:0">AMBER</span></div>
+      </div>
+    </div>
+
+    <nav class="toc" aria-label="Contents">
+      <a href="#s1">1 · Executive summary</a>
+      <a href="#s2">2 · Group scorecard</a>
+      <a href="#s3">3 · Business-unit review</a>
+      <a href="#s4">4 · Watch items &amp; anomalies</a>
+      <a href="#s5">5 · Recommended actions</a>
+      <a href="#s6">6 · Appendix — KPI definitions</a>
+    </nav>
+  </header>
+
+  <!-- 1 · EXECUTIVE SUMMARY -->
+  <section id="s1">
+    <div class="sec-head">
+      <span class="sec-no">01</span>
+      <h2>Executive summary</h2>
+      <span class="sub">Generated 01 September 2026, 09:13<br>from 13 weeks of weekly operational data</span>
+    </div>
+    <p class="bottomline">Group service held broadly stable this quarter, but <strong>Technical Support</strong> has moved outside tolerance on 4 of its headline KPIs and is dragging the group Service Level to 77.8%. It needs a recovery plan before the next Board cycle.</p>
+    <div class="prose">
+      <p>Across 631,924 handled voice contacts, group Service Level weakened from 83.8% to 77.8% over the 13 weeks, with ASA at 36s and abandonment at 5.8%. The quarter-end position is outside the 80.0% access commitment.</p><p>Performance is uneven by unit. <strong>SME Desk</strong> is the strongest (93/100 on headline KPIs), while <strong>Technical Support</strong> is the weakest (36/100). The gap between them widened during the quarter and is now the single biggest driver of group-level variance.</p><p>On efficiency, AHT rose 9s and cost per contact is AED 20.01 (+0.13 AED vs quarter start). FCR at 78.8% means roughly 21% of contacts still generate a repeat — the largest single avoidable-volume opportunity.</p>
+    </div>
+    <div class="changes">
+      <span class="lbl">What moved this quarter</span>
+      
+      <div class="chg down">
+        <span class="dot"></span><span>Average Speed of Answer moved from 28s to 36s (+8s)</span>
+      </div>
+      
+      <div class="chg down">
+        <span class="dot"></span><span>Abandonment Rate moved from 4.6% to 5.8% (+1.2 pts)</span>
+      </div>
+      
+      <div class="chg down">
+        <span class="dot"></span><span>Service Level moved from 83.8% to 77.8% (-5.9 pts)</span>
+      </div>
+      
+      <div class="chg flat">
+        <span class="dot"></span><span>Occupancy moved from 83.8% to 86.6% (+2.7 pts)</span>
+      </div>
+      
+      <div class="chg down">
+        <span class="dot"></span><span>Schedule Adherence moved from 92.9% to 89.8% (-3.0 pts)</span>
+      </div>
+      
+      <div class="chg down">
+        <span class="dot"></span><span>Customer Satisfaction moved from 86.6% to 84.8% (-1.8 pts)</span>
+      </div>
+      
+    </div>
+  </section>
+
+  <!-- 2 · GROUP SCORECARD -->
+  <section id="s2">
+    <div class="sec-head">
+      <span class="sec-no">02</span>
+      <h2>Group scorecard</h2>
+      <span class="sub">Volume-weighted across all units · RAG vs standardised target</span>
+    </div>
+    <div class="tablecard scroll-x">
+      <table>
+        <thead>
+          <tr>
+            <th>KPI</th><th>Latest</th><th>Target</th><th>WoW</th><th>Qtr&nbsp;Δ</th>
+            <th>13-week trend</th><th>vs&nbsp;Target</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+          <tr class="headline-row">
+            <td>
+              <span class="kpi-name">Service Level</span>
+              <span class="kpi-cat">Access & Responsiveness</span>
+            </td>
+            <td class="mono num strong">77.8%</td>
+            <td class="mono num muted">80.0%</td>
+            <td class="mono num delta adv">-0.5pt</td>
+            <td class="mono num delta adv">-5.9pt</td>
+            <td><svg viewBox="0 0 82 26" width="82" height="26" class="spark" role="img" aria-hidden="true"><line x1="3" y1="14.1" x2="79" y2="14.1" stroke="currentColor" stroke-dasharray="2 2" stroke-width="1" opacity="0.35"/><polyline fill="none" stroke="#c1841c" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" points="3.0,7.4 9.3,7.6 15.7,10.8 22.0,12.6 28.3,4.9 34.7,11.8 41.0,11.2 47.3,21.1 53.7,11.3 60.0,11.0 66.3,19.2 72.7,17.1 79.0,18.0"/><circle cx="79.0" cy="18.0" r="2.4" fill="#c1841c"/></svg></td>
+            <td><span class="chip amber">AMBER</span></td>
+          </tr>
+          
+          <tr class="headline-row">
+            <td>
+              <span class="kpi-name">Average Speed of Answer</span>
+              <span class="kpi-cat">Access & Responsiveness</span>
+            </td>
+            <td class="mono num strong">36s</td>
+            <td class="mono num muted">30s</td>
+            <td class="mono num delta adv">+1s</td>
+            <td class="mono num delta adv">+8s</td>
+            <td><svg viewBox="0 0 82 26" width="82" height="26" class="spark" role="img" aria-hidden="true"><line x1="3" y1="15.7" x2="79" y2="15.7" stroke="currentColor" stroke-dasharray="2 2" stroke-width="1" opacity="0.35"/><polyline fill="none" stroke="#c1841c" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" points="3.0,17.1 9.3,17.4 15.7,21.1 22.0,15.6 28.3,18.2 34.7,17.7 41.0,20.8 47.3,4.9 53.7,18.6 60.0,18.6 66.3,15.6 72.7,12.2 79.0,11.8"/><circle cx="79.0" cy="11.8" r="2.4" fill="#c1841c"/></svg></td>
+            <td><span class="chip amber">AMBER</span></td>
+          </tr>
+          
+          <tr class="headline-row">
+            <td>
+              <span class="kpi-name">Abandonment Rate</span>
+              <span class="kpi-cat">Access & Responsiveness</span>
+            </td>
+            <td class="mono num strong">5.8%</td>
+            <td class="mono num muted">5.0%</td>
+            <td class="mono num delta adv">+0.3pt</td>
+            <td class="mono num delta adv">+1.2pt</td>
+            <td><svg viewBox="0 0 82 26" width="82" height="26" class="spark" role="img" aria-hidden="true"><line x1="3" y1="17.2" x2="79" y2="17.2" stroke="currentColor" stroke-dasharray="2 2" stroke-width="1" opacity="0.35"/><polyline fill="none" stroke="#c1841c" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" points="3.0,18.5 9.3,20.0 15.7,18.8 22.0,19.3 28.3,19.0 34.7,19.8 41.0,20.2 47.3,4.9 53.7,18.8 60.0,21.1 66.3,17.5 72.7,15.4 79.0,14.4"/><circle cx="79.0" cy="14.4" r="2.4" fill="#c1841c"/></svg></td>
+            <td><span class="chip amber">AMBER</span></td>
+          </tr>
+          
+          <tr class="headline-row">
+            <td>
+              <span class="kpi-name">Average Handle Time</span>
+              <span class="kpi-cat">Efficiency & Cost</span>
+            </td>
+            <td class="mono num strong">361s</td>
+            <td class="mono num muted">360s</td>
+            <td class="mono num delta adv">+8s</td>
+            <td class="mono num delta adv">+9s</td>
+            <td><svg viewBox="0 0 82 26" width="82" height="26" class="spark" role="img" aria-hidden="true"><line x1="3" y1="9.5" x2="79" y2="9.5" stroke="currentColor" stroke-dasharray="2 2" stroke-width="1" opacity="0.35"/><polyline fill="none" stroke="#c1841c" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" points="3.0,18.4 9.3,17.1 15.7,13.4 22.0,21.1 28.3,20.6 34.7,18.9 41.0,16.1 47.3,6.7 53.7,4.9 60.0,19.1 66.3,14.4 72.7,17.9 79.0,8.3"/><circle cx="79.0" cy="8.3" r="2.4" fill="#c1841c"/></svg></td>
+            <td><span class="chip amber">AMBER</span></td>
+          </tr>
+          
+          <tr class="headline-row">
+            <td>
+              <span class="kpi-name">First Contact Resolution</span>
+              <span class="kpi-cat">Quality & Outcome</span>
+            </td>
+            <td class="mono num strong">78.8%</td>
+            <td class="mono num muted">78.0%</td>
+            <td class="mono num delta adv">-1.1pt</td>
+            <td class="mono num delta fav">+0.6pt</td>
+            <td><svg viewBox="0 0 82 26" width="82" height="26" class="spark" role="img" aria-hidden="true"><line x1="3" y1="21.1" x2="79" y2="21.1" stroke="currentColor" stroke-dasharray="2 2" stroke-width="1" opacity="0.35"/><polyline fill="none" stroke="#2f8f5b" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" points="3.0,19.5 9.3,11.9 15.7,17.0 22.0,4.9 28.3,19.6 34.7,11.5 41.0,7.6 47.3,16.4 53.7,6.7 60.0,14.7 66.3,16.4 72.7,8.7 79.0,15.7"/><circle cx="79.0" cy="15.7" r="2.4" fill="#2f8f5b"/></svg></td>
+            <td><span class="chip green">GREEN</span></td>
+          </tr>
+          
+          <tr class="headline-row">
+            <td>
+              <span class="kpi-name">Customer Satisfaction</span>
+              <span class="kpi-cat">Quality & Outcome</span>
+            </td>
+            <td class="mono num strong">84.8%</td>
+            <td class="mono num muted">85.0%</td>
+            <td class="mono num delta adv">-1.0pt</td>
+            <td class="mono num delta adv">-1.8pt</td>
+            <td><svg viewBox="0 0 82 26" width="82" height="26" class="spark" role="img" aria-hidden="true"><line x1="3" y1="19.6" x2="79" y2="19.6" stroke="currentColor" stroke-dasharray="2 2" stroke-width="1" opacity="0.35"/><polyline fill="none" stroke="#c1841c" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" points="3.0,8.8 9.3,15.7 15.7,9.7 22.0,9.7 28.3,14.7 34.7,10.5 41.0,4.9 47.3,11.5 53.7,7.9 60.0,15.7 66.3,14.5 72.7,14.0 79.0,21.1"/><circle cx="79.0" cy="21.1" r="2.4" fill="#c1841c"/></svg></td>
+            <td><span class="chip amber">AMBER</span></td>
+          </tr>
+          
+          <tr class="">
+            <td>
+              <span class="kpi-name">Repeat Contact Rate</span>
+              <span class="kpi-cat">Quality & Outcome</span>
+            </td>
+            <td class="mono num strong">20.9%</td>
+            <td class="mono num muted">20.0%</td>
+            <td class="mono num delta adv">+0.7pt</td>
+            <td class="mono num delta fav">-0.3pt</td>
+            <td><svg viewBox="0 0 82 26" width="82" height="26" class="spark" role="img" aria-hidden="true"><line x1="3" y1="19.3" x2="79" y2="19.3" stroke="currentColor" stroke-dasharray="2 2" stroke-width="1" opacity="0.35"/><polyline fill="none" stroke="#c1841c" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" points="3.0,11.2 9.3,16.9 15.7,12.6 22.0,21.1 28.3,4.9 34.7,12.3 41.0,18.7 47.3,8.9 53.7,17.4 60.0,19.9 66.3,15.2 72.7,17.4 79.0,12.9"/><circle cx="79.0" cy="12.9" r="2.4" fill="#c1841c"/></svg></td>
+            <td><span class="chip amber">AMBER</span></td>
+          </tr>
+          
+          <tr class="">
+            <td>
+              <span class="kpi-name">Occupancy</span>
+              <span class="kpi-cat">Efficiency & Cost</span>
+            </td>
+            <td class="mono num strong">86.6%</td>
+            <td class="mono num muted">85.0%</td>
+            <td class="mono num delta neutral">+1.8pt</td>
+            <td class="mono num delta neutral">+2.7pt</td>
+            <td><svg viewBox="0 0 82 26" width="82" height="26" class="spark" role="img" aria-hidden="true"><line x1="3" y1="16.2" x2="79" y2="16.2" stroke="currentColor" stroke-dasharray="2 2" stroke-width="1" opacity="0.35"/><polyline fill="none" stroke="#2f8f5b" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" points="3.0,19.5 9.3,21.1 15.7,17.1 22.0,13.2 28.3,13.3 34.7,20.1 41.0,20.4 47.3,4.9 53.7,10.7 60.0,9.6 66.3,15.0 72.7,16.8 79.0,11.8"/><circle cx="79.0" cy="11.8" r="2.4" fill="#2f8f5b"/></svg></td>
+            <td><span class="chip green">GREEN</span></td>
+          </tr>
+          
+          <tr class="">
+            <td>
+              <span class="kpi-name">Schedule Adherence</span>
+              <span class="kpi-cat">Efficiency & Cost</span>
+            </td>
+            <td class="mono num strong">89.8%</td>
+            <td class="mono num muted">90.0%</td>
+            <td class="mono num delta adv">-0.5pt</td>
+            <td class="mono num delta adv">-3.0pt</td>
+            <td><svg viewBox="0 0 82 26" width="82" height="26" class="spark" role="img" aria-hidden="true"><line x1="3" y1="18.5" x2="79" y2="18.5" stroke="currentColor" stroke-dasharray="2 2" stroke-width="1" opacity="0.35"/><polyline fill="none" stroke="#c1841c" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" points="3.0,4.9 9.3,12.2 15.7,8.3 22.0,15.6 28.3,16.0 34.7,17.4 41.0,11.6 47.3,21.1 53.7,7.6 60.0,18.6 66.3,17.6 72.7,17.0 79.0,19.3"/><circle cx="79.0" cy="19.3" r="2.4" fill="#c1841c"/></svg></td>
+            <td><span class="chip amber">AMBER</span></td>
+          </tr>
+          
+          <tr class="">
+            <td>
+              <span class="kpi-name">Forecast Accuracy</span>
+              <span class="kpi-cat">Planning</span>
+            </td>
+            <td class="mono num strong">92.0%</td>
+            <td class="mono num muted">92.0%</td>
+            <td class="mono num delta adv">-0.7pt</td>
+            <td class="mono num delta adv">-0.2pt</td>
+            <td><svg viewBox="0 0 82 26" width="82" height="26" class="spark" role="img" aria-hidden="true"><line x1="3" y1="14.2" x2="79" y2="14.2" stroke="currentColor" stroke-dasharray="2 2" stroke-width="1" opacity="0.35"/><polyline fill="none" stroke="#2f8f5b" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" points="3.0,12.8 9.3,18.0 15.7,17.9 22.0,4.9 28.3,21.1 34.7,10.6 41.0,10.7 47.3,11.5 53.7,18.4 60.0,7.3 66.3,9.2 72.7,9.0 79.0,14.0"/><circle cx="79.0" cy="14.0" r="2.4" fill="#2f8f5b"/></svg></td>
+            <td><span class="chip green">GREEN</span></td>
+          </tr>
+          
+          <tr class="headline-row">
+            <td>
+              <span class="kpi-name">Cost per Contact</span>
+              <span class="kpi-cat">Efficiency & Cost</span>
+            </td>
+            <td class="mono num strong">AED 20.01</td>
+            <td class="mono num muted">AED 18.00</td>
+            <td class="mono num delta adv">+0.31</td>
+            <td class="mono num delta adv">+0.13</td>
+            <td><svg viewBox="0 0 82 26" width="82" height="26" class="spark" role="img" aria-hidden="true"><line x1="3" y1="21.1" x2="79" y2="21.1" stroke="currentColor" stroke-dasharray="2 2" stroke-width="1" opacity="0.35"/><polyline fill="none" stroke="#c1841c" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round" points="3.0,8.8 9.3,4.9 15.7,8.2 22.0,11.1 28.3,9.6 34.7,8.7 41.0,6.4 47.3,11.8 53.7,9.2 60.0,13.4 66.3,11.2 72.7,9.9 79.0,8.0"/><circle cx="79.0" cy="8.0" r="2.4" fill="#c1841c"/></svg></td>
+            <td><span class="chip amber">AMBER</span></td>
+          </tr>
+          
+        </tbody>
+      </table>
+    </div>
+    <div class="chartgrid">
+      
+      <div class="chartcard">
+        <div class="ch-h"><span class="t">Service Level</span><span class="v" style="color:var(--a)">77.8%</span></div>
+        <svg viewBox="0 0 520 190" class="linechart" role="img" aria-label="Group Service Level"><line x1="44" y1="164.0" x2="506" y2="164.0" class="grid"/><text x="38" y="167.0" class="ytick" text-anchor="end">73%</text><line x1="44" y1="127.0" x2="506" y2="127.0" class="grid"/><text x="38" y="130.0" class="ytick" text-anchor="end">77%</text><line x1="44" y1="90.0" x2="506" y2="90.0" class="grid"/><text x="38" y="93.0" class="ytick" text-anchor="end">80%</text><line x1="44" y1="53.0" x2="506" y2="53.0" class="grid"/><text x="38" y="56.0" class="ytick" text-anchor="end">83%</text><line x1="44" y1="16.0" x2="506" y2="16.0" class="grid"/><text x="38" y="19.0" class="ytick" text-anchor="end">87%</text><path d="M 44.0,164.0 L 44.0,48.8 L 82.5,49.6 L 121.0,70.0 L 159.5,81.4 L 198.0,33.1 L 236.5,76.2 L 275.0,72.7 L 313.5,134.6 L 352.0,73.1 L 390.5,71.0 L 429.0,122.8 L 467.5,109.8 L 506.0,115.0 L 506.0,164.0 Z" fill="rgba(14,124,123,0.10)" stroke="none"/><line x1="44" y1="90.9" x2="506" y2="90.9" class="ref-target"/><text x="506" y="86.9" class="ref-label" text-anchor="end">target 80%</text><line x1="44" y1="146.9" x2="506" y2="146.9" class="ref-amber"/><polyline fill="none" stroke="#c1841c" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" points="44.0,48.8 82.5,49.6 121.0,70.0 159.5,81.4 198.0,33.1 236.5,76.2 275.0,72.7 313.5,134.6 352.0,73.1 390.5,71.0 429.0,122.8 467.5,109.8 506.0,115.0"/><circle cx="506.0" cy="115.0" r="3.4" fill="#c1841c"/><text x="44.0" y="182" class="xtick" text-anchor="middle">05 Jul</text><text x="275.0" y="182" class="xtick" text-anchor="middle">16 Aug</text><text x="506.0" y="182" class="xtick" text-anchor="middle">27 Sep</text></svg>
+      </div>
+      
+      <div class="chartcard">
+        <div class="ch-h"><span class="t">Average Speed of Answer</span><span class="v" style="color:var(--a)">36s</span></div>
+        <svg viewBox="0 0 520 190" class="linechart" role="img" aria-label="Group Average Speed of Answer"><line x1="44" y1="164.0" x2="506" y2="164.0" class="grid"/><text x="38" y="167.0" class="ytick" text-anchor="end">18s</text><line x1="44" y1="127.0" x2="506" y2="127.0" class="grid"/><text x="38" y="130.0" class="ytick" text-anchor="end">26s</text><line x1="44" y1="90.0" x2="506" y2="90.0" class="grid"/><text x="38" y="93.0" class="ytick" text-anchor="end">34s</text><line x1="44" y1="53.0" x2="506" y2="53.0" class="grid"/><text x="38" y="56.0" class="ytick" text-anchor="end">42s</text><line x1="44" y1="16.0" x2="506" y2="16.0" class="grid"/><text x="38" y="19.0" class="ytick" text-anchor="end">50s</text><path d="M 44.0,164.0 L 44.0,119.1 L 82.5,121.0 L 121.0,146.9 L 159.5,108.1 L 198.0,126.9 L 236.5,123.3 L 275.0,144.8 L 313.5,33.1 L 352.0,129.2 L 390.5,129.5 L 429.0,108.3 L 467.5,84.2 L 506.0,81.7 L 506.0,164.0 Z" fill="rgba(14,124,123,0.10)" stroke="none"/><line x1="44" y1="109.1" x2="506" y2="109.1" class="ref-target"/><text x="506" y="105.1" class="ref-label" text-anchor="end">target 30s</text><line x1="44" y1="38.6" x2="506" y2="38.6" class="ref-amber"/><polyline fill="none" stroke="#c1841c" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" points="44.0,119.1 82.5,121.0 121.0,146.9 159.5,108.1 198.0,126.9 236.5,123.3 275.0,144.8 313.5,33.1 352.0,129.2 390.5,129.5 429.0,108.3 467.5,84.2 506.0,81.7"/><circle cx="506.0" cy="81.7" r="3.4" fill="#c1841c"/><text x="44.0" y="182" class="xtick" text-anchor="middle">05 Jul</text><text x="275.0" y="182" class="xtick" text-anchor="middle">16 Aug</text><text x="506.0" y="182" class="xtick" text-anchor="middle">27 Sep</text></svg>
+      </div>
+      
+      <div class="chartcard">
+        <div class="ch-h"><span class="t">Abandonment Rate</span><span class="v" style="color:var(--a)">5.8%</span></div>
+        <svg viewBox="0 0 520 190" class="linechart" role="img" aria-label="Group Abandonment Rate"><line x1="44" y1="164.0" x2="506" y2="164.0" class="grid"/><text x="38" y="167.0" class="ytick" text-anchor="end">3%</text><line x1="44" y1="127.0" x2="506" y2="127.0" class="grid"/><text x="38" y="130.0" class="ytick" text-anchor="end">5%</text><line x1="44" y1="90.0" x2="506" y2="90.0" class="grid"/><text x="38" y="93.0" class="ytick" text-anchor="end">6%</text><line x1="44" y1="53.0" x2="506" y2="53.0" class="grid"/><text x="38" y="56.0" class="ytick" text-anchor="end">8%</text><line x1="44" y1="16.0" x2="506" y2="16.0" class="grid"/><text x="38" y="19.0" class="ytick" text-anchor="end">9%</text><path d="M 44.0,164.0 L 44.0,128.6 L 82.5,139.6 L 121.0,130.8 L 159.5,134.7 L 198.0,132.1 L 236.5,137.8 L 275.0,140.8 L 313.5,33.1 L 352.0,130.9 L 390.5,146.9 L 429.0,121.4 L 467.5,107.0 L 506.0,100.1 L 506.0,164.0 Z" fill="rgba(14,124,123,0.10)" stroke="none"/><line x1="44" y1="119.7" x2="506" y2="119.7" class="ref-target"/><text x="506" y="115.7" class="ref-label" text-anchor="end">target 5%</text><line x1="44" y1="47.1" x2="506" y2="47.1" class="ref-amber"/><polyline fill="none" stroke="#c1841c" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" points="44.0,128.6 82.5,139.6 121.0,130.8 159.5,134.7 198.0,132.1 236.5,137.8 275.0,140.8 313.5,33.1 352.0,130.9 390.5,146.9 429.0,121.4 467.5,107.0 506.0,100.1"/><circle cx="506.0" cy="100.1" r="3.4" fill="#c1841c"/><text x="44.0" y="182" class="xtick" text-anchor="middle">05 Jul</text><text x="275.0" y="182" class="xtick" text-anchor="middle">16 Aug</text><text x="506.0" y="182" class="xtick" text-anchor="middle">27 Sep</text></svg>
+      </div>
+      
+      <div class="chartcard">
+        <div class="ch-h"><span class="t">Cost per Contact</span><span class="v" style="color:var(--a)">AED 20.01</span></div>
+        <svg viewBox="0 0 520 190" class="linechart" role="img" aria-label="Group Cost per Contact"><line x1="44" y1="164.0" x2="506" y2="164.0" class="grid"/><text x="38" y="167.0" class="ytick" text-anchor="end">AED 18</text><line x1="44" y1="127.0" x2="506" y2="127.0" class="grid"/><text x="38" y="130.0" class="ytick" text-anchor="end">AED 19</text><line x1="44" y1="90.0" x2="506" y2="90.0" class="grid"/><text x="38" y="93.0" class="ytick" text-anchor="end">AED 20</text><line x1="44" y1="53.0" x2="506" y2="53.0" class="grid"/><text x="38" y="56.0" class="ytick" text-anchor="end">AED 20</text><line x1="44" y1="16.0" x2="506" y2="16.0" class="grid"/><text x="38" y="19.0" class="ytick" text-anchor="end">AED 21</text><path d="M 44.0,164.0 L 44.0,75.7 L 82.5,53.1 L 121.0,71.8 L 159.5,89.2 L 198.0,80.5 L 236.5,75.2 L 275.0,61.7 L 313.5,93.2 L 352.0,78.1 L 390.5,102.1 L 429.0,89.8 L 467.5,82.2 L 506.0,70.6 L 506.0,164.0 Z" fill="rgba(14,124,123,0.10)" stroke="none"/><line x1="44" y1="146.9" x2="506" y2="146.9" class="ref-target"/><text x="506" y="142.9" class="ref-label" text-anchor="end">target AED 18</text><line x1="44" y1="33.1" x2="506" y2="33.1" class="ref-amber"/><polyline fill="none" stroke="#c1841c" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" points="44.0,75.7 82.5,53.1 121.0,71.8 159.5,89.2 198.0,80.5 236.5,75.2 275.0,61.7 313.5,93.2 352.0,78.1 390.5,102.1 429.0,89.8 467.5,82.2 506.0,70.6"/><circle cx="506.0" cy="70.6" r="3.4" fill="#c1841c"/><text x="44.0" y="182" class="xtick" text-anchor="middle">05 Jul</text><text x="275.0" y="182" class="xtick" text-anchor="middle">16 Aug</text><text x="506.0" y="182" class="xtick" text-anchor="middle">27 Sep</text></svg>
+      </div>
+      
+    </div>
+  </section>
+
+  <!-- 3 · BUSINESS-UNIT REVIEW -->
+  <section id="s3">
+    <div class="sec-head">
+      <span class="sec-no">03</span>
+      <h2>Business-unit review</h2>
+      <span class="sub">Ordered by headline-KPI score, weakest last</span>
+    </div>
+    <div class="bugrid">
+      
+      <article class="bucard">
+        <div class="bucard-top">
+          <div>
+            <h3>Consumer Care</h3>
+            <span class="bu-verdict on-track">On track</span>
+          </div>
+          <div class="bu-score">
+            <span class="n num">79</span>
+            <span class="l">/100 headline</span>
+            <svg viewBox="0 0 132 12" width="132" height="12" class="ragbar" role="img" aria-hidden="true"><rect x="0.0" y="0" width="72.0" height="12" fill="var(--g)" rx="1.5"/><rect x="72.0" y="0" width="60.0" height="12" fill="var(--a)" rx="1.5"/></svg>
+          </div>
+        </div>
+        <p class="bu-readout">SL 82.3% (-1.2 pts WoW), CSAT 84.0%.</p>
+        <div class="bucard-body">
+          <div class="mini">
+            
+            <div class="cell" title="Service Level">
+              <span class="l">SL 20s <span class="tg stable">–</span></span>
+              <div class="row">
+                <span class="val num">82.3%<span class="wow num">-1.2pt</span></span>
+                <span class="dotb green" title="green"></span>
+              </div>
+            </div>
+            
+            <div class="cell" title="Average Speed of Answer">
+              <span class="l">ASA <span class="tg stable">–</span></span>
+              <div class="row">
+                <span class="val num">24s<span class="wow num">-4s</span></span>
+                <span class="dotb green" title="green"></span>
+              </div>
+            </div>
+            
+            <div class="cell" title="Abandonment Rate">
+              <span class="l">Aband. <span class="tg stable">–</span></span>
+              <div class="row">
+                <span class="val num">4.4%<span class="wow num">-0.3pt</span></span>
+                <span class="dotb green" title="green"></span>
+              </div>
+            </div>
+            
+            <div class="cell" title="Average Handle Time">
+              <span class="l">AHT <span class="tg stable">–</span></span>
+              <div class="row">
+                <span class="val num">358s<span class="wow num">+16s</span></span>
+                <span class="dotb green" title="green"></span>
+              </div>
+            </div>
+            
+            <div class="cell" title="First Contact Resolution">
+              <span class="l">FCR <span class="tg stable">–</span></span>
+              <div class="row">
+                <span class="val num">77.3%<span class="wow num">-3.7pt</span></span>
+                <span class="dotb amber" title="amber"></span>
+              </div>
+            </div>
+            
+            <div class="cell" title="Customer Satisfaction">
+              <span class="l">CSAT <span class="tg stable">–</span></span>
+              <div class="row">
+                <span class="val num">84.0%<span class="wow num">-1.7pt</span></span>
+                <span class="dotb amber" title="amber"></span>
+              </div>
+            </div>
+            
+            <div class="cell" title="Cost per Contact">
+              <span class="l">CPC <span class="tg stable">–</span></span>
+              <div class="row">
+                <span class="val num">AED 19.94<span class="wow num">+0.23</span></span>
+                <span class="dotb amber" title="amber"></span>
+              </div>
+            </div>
+            
+            <div class="cell" title="Schedule Adherence">
+              <span class="l">Adher. <span class="tg stable">–</span></span>
+              <div class="row">
+                <span class="val num">90.8%<span class="wow num">-0.3pt</span></span>
+                <span class="dotb green" title="green"></span>
+              </div>
+            </div>
+            
+          </div>
+          <div class="bu-chart">
+            <div class="cap">Service Level · 13 weeks vs 80% target</div>
+            <svg viewBox="0 0 520 190" class="linechart" role="img" aria-label="Consumer Care Service Level, 13 weeks"><line x1="44" y1="164.0" x2="506" y2="164.0" class="grid"/><text x="38" y="167.0" class="ytick" text-anchor="end">65%</text><line x1="44" y1="127.0" x2="506" y2="127.0" class="grid"/><text x="38" y="130.0" class="ytick" text-anchor="end">71%</text><line x1="44" y1="90.0" x2="506" y2="90.0" class="grid"/><text x="38" y="93.0" class="ytick" text-anchor="end">77%</text><line x1="44" y1="53.0" x2="506" y2="53.0" class="grid"/><text x="38" y="56.0" class="ytick" text-anchor="end">83%</text><line x1="44" y1="16.0" x2="506" y2="16.0" class="grid"/><text x="38" y="19.0" class="ytick" text-anchor="end">89%</text><path d="M 44.0,164.0 L 44.0,50.3 L 82.5,40.5 L 121.0,55.3 L 159.5,60.4 L 198.0,33.1 L 236.5,69.3 L 275.0,60.5 L 313.5,146.9 L 352.0,68.0 L 390.5,58.2 L 429.0,83.1 L 467.5,50.0 L 506.0,57.3 L 506.0,164.0 Z" fill="rgba(14,124,123,0.10)" stroke="none"/><line x1="44" y1="71.6" x2="506" y2="71.6" class="ref-target"/><text x="506" y="67.6" class="ref-label" text-anchor="end">target 80%</text><line x1="44" y1="102.6" x2="506" y2="102.6" class="ref-amber"/><polyline fill="none" stroke="#2f8f5b" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" points="44.0,50.3 82.5,40.5 121.0,55.3 159.5,60.4 198.0,33.1 236.5,69.3 275.0,60.5 313.5,146.9 352.0,68.0 390.5,58.2 429.0,83.1 467.5,50.0 506.0,57.3"/><circle cx="506.0" cy="57.3" r="3.4" fill="#2f8f5b"/><text x="44.0" y="182" class="xtick" text-anchor="middle">05 Jul</text><text x="275.0" y="182" class="xtick" text-anchor="middle">16 Aug</text><text x="506.0" y="182" class="xtick" text-anchor="middle">27 Sep</text></svg>
+          </div>
+        </div>
+      </article>
+      
+      <article class="bucard">
+        <div class="bucard-top">
+          <div>
+            <h3>SME Desk</h3>
+            <span class="bu-verdict on-track">On track</span>
+          </div>
+          <div class="bu-score">
+            <span class="n num">93</span>
+            <span class="l">/100 headline</span>
+            <svg viewBox="0 0 132 12" width="132" height="12" class="ragbar" role="img" aria-hidden="true"><rect x="0.0" y="0" width="108.0" height="12" fill="var(--g)" rx="1.5"/><rect x="108.0" y="0" width="24.0" height="12" fill="var(--a)" rx="1.5"/></svg>
+          </div>
+        </div>
+        <p class="bu-readout">SL 89.1% (+3.7 pts WoW), CSAT 88.8%.</p>
+        <div class="bucard-body">
+          <div class="mini">
+            
+            <div class="cell" title="Service Level">
+              <span class="l">SL 20s <span class="tg stable">–</span></span>
+              <div class="row">
+                <span class="val num">89.1%<span class="wow num">+3.7pt</span></span>
+                <span class="dotb green" title="green"></span>
+              </div>
+            </div>
+            
+            <div class="cell" title="Average Speed of Answer">
+              <span class="l">ASA <span class="tg stable">–</span></span>
+              <div class="row">
+                <span class="val num">19s<span class="wow num">-6s</span></span>
+                <span class="dotb green" title="green"></span>
+              </div>
+            </div>
+            
+            <div class="cell" title="Abandonment Rate">
+              <span class="l">Aband. <span class="tg stable">–</span></span>
+              <div class="row">
+                <span class="val num">3.5%<span class="wow num">+0.5pt</span></span>
+                <span class="dotb green" title="green"></span>
+              </div>
+            </div>
+            
+            <div class="cell" title="Average Handle Time">
+              <span class="l">AHT <span class="tg stable">–</span></span>
+              <div class="row">
+                <span class="val num">322s<span class="wow num">+6s</span></span>
+                <span class="dotb green" title="green"></span>
+              </div>
+            </div>
+            
+            <div class="cell" title="First Contact Resolution">
+              <span class="l">FCR <span class="tg stable">–</span></span>
+              <div class="row">
+                <span class="val num">83.2%<span class="wow num">+1.6pt</span></span>
+                <span class="dotb green" title="green"></span>
+              </div>
+            </div>
+            
+            <div class="cell" title="Customer Satisfaction">
+              <span class="l">CSAT <span class="tg stable">–</span></span>
+              <div class="row">
+                <span class="val num">88.8%<span class="wow num">+1.2pt</span></span>
+                <span class="dotb green" title="green"></span>
+              </div>
+            </div>
+            
+            <div class="cell" title="Cost per Contact">
+              <span class="l">CPC <span class="tg stable">–</span></span>
+              <div class="row">
+                <span class="val num">AED 19.09<span class="wow num">+1.02</span></span>
+                <span class="dotb amber" title="amber"></span>
+              </div>
+            </div>
+            
+            <div class="cell" title="Schedule Adherence">
+              <span class="l">Adher. <span class="tg stable">–</span></span>
+              <div class="row">
+                <span class="val num">92.6%<span class="wow num">+0.6pt</span></span>
+                <span class="dotb green" title="green"></span>
+              </div>
+            </div>
+            
+          </div>
+          <div class="bu-chart">
+            <div class="cap">Service Level · 13 weeks vs 80% target</div>
+            <svg viewBox="0 0 520 190" class="linechart" role="img" aria-label="SME Desk Service Level, 13 weeks"><line x1="44" y1="164.0" x2="506" y2="164.0" class="grid"/><text x="38" y="167.0" class="ytick" text-anchor="end">73%</text><line x1="44" y1="127.0" x2="506" y2="127.0" class="grid"/><text x="38" y="130.0" class="ytick" text-anchor="end">77%</text><line x1="44" y1="90.0" x2="506" y2="90.0" class="grid"/><text x="38" y="93.0" class="ytick" text-anchor="end">82%</text><line x1="44" y1="53.0" x2="506" y2="53.0" class="grid"/><text x="38" y="56.0" class="ytick" text-anchor="end">87%</text><line x1="44" y1="16.0" x2="506" y2="16.0" class="grid"/><text x="38" y="19.0" class="ytick" text-anchor="end">91%</text><path d="M 44.0,164.0 L 44.0,52.5 L 82.5,63.0 L 121.0,42.0 L 159.5,60.7 L 198.0,73.7 L 236.5,56.9 L 275.0,71.7 L 313.5,78.7 L 352.0,55.7 L 390.5,79.8 L 429.0,80.0 L 467.5,62.6 L 506.0,33.1 L 506.0,164.0 Z" fill="rgba(14,124,123,0.10)" stroke="none"/><line x1="44" y1="106.4" x2="506" y2="106.4" class="ref-target"/><text x="506" y="102.4" class="ref-label" text-anchor="end">target 80%</text><line x1="44" y1="146.9" x2="506" y2="146.9" class="ref-amber"/><polyline fill="none" stroke="#2f8f5b" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" points="44.0,52.5 82.5,63.0 121.0,42.0 159.5,60.7 198.0,73.7 236.5,56.9 275.0,71.7 313.5,78.7 352.0,55.7 390.5,79.8 429.0,80.0 467.5,62.6 506.0,33.1"/><circle cx="506.0" cy="33.1" r="3.4" fill="#2f8f5b"/><text x="44.0" y="182" class="xtick" text-anchor="middle">05 Jul</text><text x="275.0" y="182" class="xtick" text-anchor="middle">16 Aug</text><text x="506.0" y="182" class="xtick" text-anchor="middle">27 Sep</text></svg>
+          </div>
+        </div>
+      </article>
+      
+      <article class="bucard">
+        <div class="bucard-top">
+          <div>
+            <h3>Technical Support</h3>
+            <span class="bu-verdict escalate">Escalate</span>
+          </div>
+          <div class="bu-score">
+            <span class="n num">36</span>
+            <span class="l">/100 headline</span>
+            <svg viewBox="0 0 132 12" width="132" height="12" class="ragbar" role="img" aria-hidden="true"><rect x="0.0" y="0" width="24.0" height="12" fill="var(--g)" rx="1.5"/><rect x="24.0" y="0" width="60.0" height="12" fill="var(--a)" rx="1.5"/><rect x="84.0" y="0" width="48.0" height="12" fill="var(--r)" rx="1.5"/></svg>
+          </div>
+        </div>
+        <p class="bu-readout">SL 59.3% (-1.0 pts WoW), CSAT 82.6%. Outside tolerance on Service Level, Average Speed of Answer, Abandonment Rate and Schedule Adherence. Deteriorating trend on Service Level, Average Speed of Answer, Abandonment Rate and Schedule Adherence.</p>
+        <div class="bucard-body">
+          <div class="mini">
+            
+            <div class="cell" title="Service Level">
+              <span class="l">SL 20s <span class="tg deteriorating">▼</span></span>
+              <div class="row">
+                <span class="val num">59.3%<span class="wow num">-1.0pt</span></span>
+                <span class="dotb red" title="red"></span>
+              </div>
+            </div>
+            
+            <div class="cell" title="Average Speed of Answer">
+              <span class="l">ASA <span class="tg deteriorating">▼</span></span>
+              <div class="row">
+                <span class="val num">84s<span class="wow num">+17s</span></span>
+                <span class="dotb red" title="red"></span>
+              </div>
+            </div>
+            
+            <div class="cell" title="Abandonment Rate">
+              <span class="l">Aband. <span class="tg deteriorating">▼</span></span>
+              <div class="row">
+                <span class="val num">10.9%<span class="wow num">+1.2pt</span></span>
+                <span class="dotb red" title="red"></span>
+              </div>
+            </div>
+            
+            <div class="cell" title="Average Handle Time">
+              <span class="l">AHT <span class="tg stable">–</span></span>
+              <div class="row">
+                <span class="val num">368s<span class="wow num">+7s</span></span>
+                <span class="dotb amber" title="amber"></span>
+              </div>
+            </div>
+            
+            <div class="cell" title="First Contact Resolution">
+              <span class="l">FCR <span class="tg stable">–</span></span>
+              <div class="row">
+                <span class="val num">78.6%<span class="wow num">+0.2pt</span></span>
+                <span class="dotb green" title="green"></span>
+              </div>
+            </div>
+            
+            <div class="cell" title="Customer Satisfaction">
+              <span class="l">CSAT <span class="tg stable">–</span></span>
+              <div class="row">
+                <span class="val num">82.6%<span class="wow num">-2.3pt</span></span>
+                <span class="dotb amber" title="amber"></span>
+              </div>
+            </div>
+            
+            <div class="cell" title="Cost per Contact">
+              <span class="l">CPC <span class="tg stable">–</span></span>
+              <div class="row">
+                <span class="val num">AED 20.29<span class="wow num">+0.84</span></span>
+                <span class="dotb amber" title="amber"></span>
+              </div>
+            </div>
+            
+            <div class="cell" title="Schedule Adherence">
+              <span class="l">Adher. <span class="tg deteriorating">▼</span></span>
+              <div class="row">
+                <span class="val num">84.1%<span class="wow num">+0.2pt</span></span>
+                <span class="dotb red" title="red"></span>
+              </div>
+            </div>
+            
+          </div>
+          <div class="bu-chart">
+            <div class="cap">Service Level · 13 weeks vs 80% target</div>
+            <svg viewBox="0 0 520 190" class="linechart" role="img" aria-label="Technical Support Service Level, 13 weeks"><line x1="44" y1="164.0" x2="506" y2="164.0" class="grid"/><text x="38" y="167.0" class="ytick" text-anchor="end">55%</text><line x1="44" y1="127.0" x2="506" y2="127.0" class="grid"/><text x="38" y="130.0" class="ytick" text-anchor="end">64%</text><line x1="44" y1="90.0" x2="506" y2="90.0" class="grid"/><text x="38" y="93.0" class="ytick" text-anchor="end">73%</text><line x1="44" y1="53.0" x2="506" y2="53.0" class="grid"/><text x="38" y="56.0" class="ytick" text-anchor="end">81%</text><line x1="44" y1="16.0" x2="506" y2="16.0" class="grid"/><text x="38" y="19.0" class="ytick" text-anchor="end">90%</text><path d="M 44.0,164.0 L 44.0,45.7 L 82.5,38.4 L 121.0,54.8 L 159.5,58.2 L 198.0,33.1 L 236.5,52.4 L 275.0,62.1 L 313.5,53.6 L 352.0,68.6 L 390.5,65.9 L 429.0,103.3 L 467.5,142.7 L 506.0,146.9 L 506.0,164.0 Z" fill="rgba(14,124,123,0.10)" stroke="none"/><line x1="44" y1="57.8" x2="506" y2="57.8" class="ref-target"/><text x="506" y="53.8" class="ref-label" text-anchor="end">target 80%</text><line x1="44" y1="79.3" x2="506" y2="79.3" class="ref-amber"/><polyline fill="none" stroke="#c0392f" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" points="44.0,45.7 82.5,38.4 121.0,54.8 159.5,58.2 198.0,33.1 236.5,52.4 275.0,62.1 313.5,53.6 352.0,68.6 390.5,65.9 429.0,103.3 467.5,142.7 506.0,146.9"/><circle cx="506.0" cy="146.9" r="3.4" fill="#c0392f"/><text x="44.0" y="182" class="xtick" text-anchor="middle">05 Jul</text><text x="275.0" y="182" class="xtick" text-anchor="middle">16 Aug</text><text x="506.0" y="182" class="xtick" text-anchor="middle">27 Sep</text></svg>
+          </div>
+        </div>
+      </article>
+      
+      <article class="bucard">
+        <div class="bucard-top">
+          <div>
+            <h3>Collections</h3>
+            <span class="bu-verdict watch">Watch</span>
+          </div>
+          <div class="bu-score">
+            <span class="n num">71</span>
+            <span class="l">/100 headline</span>
+            <svg viewBox="0 0 132 12" width="132" height="12" class="ragbar" role="img" aria-hidden="true"><rect x="0.0" y="0" width="84.0" height="12" fill="var(--g)" rx="1.5"/><rect x="84.0" y="0" width="48.0" height="12" fill="var(--a)" rx="1.5"/></svg>
+          </div>
+        </div>
+        <p class="bu-readout">SL 79.8% (-1.4 pts WoW), CSAT 84.9%. Deteriorating trend on Average Handle Time. Improving trend on Average Speed of Answer.</p>
+        <div class="bucard-body">
+          <div class="mini">
+            
+            <div class="cell" title="Service Level">
+              <span class="l">SL 20s <span class="tg stable">–</span></span>
+              <div class="row">
+                <span class="val num">79.8%<span class="wow num">-1.4pt</span></span>
+                <span class="dotb amber" title="amber"></span>
+              </div>
+            </div>
+            
+            <div class="cell" title="Average Speed of Answer">
+              <span class="l">ASA <span class="tg improving">▲</span></span>
+              <div class="row">
+                <span class="val num">15s<span class="wow num">-11s</span></span>
+                <span class="dotb green" title="green"></span>
+              </div>
+            </div>
+            
+            <div class="cell" title="Abandonment Rate">
+              <span class="l">Aband. <span class="tg stable">–</span></span>
+              <div class="row">
+                <span class="val num">4.5%<span class="wow num">-0.2pt</span></span>
+                <span class="dotb green" title="green"></span>
+              </div>
+            </div>
+            
+            <div class="cell" title="Average Handle Time">
+              <span class="l">AHT <span class="tg deteriorating">▼</span></span>
+              <div class="row">
+                <span class="val num">391s<span class="wow num">+0s</span></span>
+                <span class="dotb amber" title="amber"></span>
+              </div>
+            </div>
+            
+            <div class="cell" title="First Contact Resolution">
+              <span class="l">FCR <span class="tg stable">–</span></span>
+              <div class="row">
+                <span class="val num">79.2%<span class="wow num">+0.8pt</span></span>
+                <span class="dotb green" title="green"></span>
+              </div>
+            </div>
+            
+            <div class="cell" title="Customer Satisfaction">
+              <span class="l">CSAT <span class="tg stable">–</span></span>
+              <div class="row">
+                <span class="val num">84.9%<span class="wow num">-0.7pt</span></span>
+                <span class="dotb amber" title="amber"></span>
+              </div>
+            </div>
+            
+            <div class="cell" title="Cost per Contact">
+              <span class="l">CPC <span class="tg stable">–</span></span>
+              <div class="row">
+                <span class="val num">AED 20.62<span class="wow num">-0.22</span></span>
+                <span class="dotb amber" title="amber"></span>
+              </div>
+            </div>
+            
+            <div class="cell" title="Schedule Adherence">
+              <span class="l">Adher. <span class="tg stable">–</span></span>
+              <div class="row">
+                <span class="val num">93.0%<span class="wow num">-0.8pt</span></span>
+                <span class="dotb green" title="green"></span>
+              </div>
+            </div>
+            
+          </div>
+          <div class="bu-chart">
+            <div class="cap">Service Level · 13 weeks vs 80% target</div>
+            <svg viewBox="0 0 520 190" class="linechart" role="img" aria-label="Collections Service Level, 13 weeks"><line x1="44" y1="164.0" x2="506" y2="164.0" class="grid"/><text x="38" y="167.0" class="ytick" text-anchor="end">73%</text><line x1="44" y1="127.0" x2="506" y2="127.0" class="grid"/><text x="38" y="130.0" class="ytick" text-anchor="end">77%</text><line x1="44" y1="90.0" x2="506" y2="90.0" class="grid"/><text x="38" y="93.0" class="ytick" text-anchor="end">80%</text><line x1="44" y1="53.0" x2="506" y2="53.0" class="grid"/><text x="38" y="56.0" class="ytick" text-anchor="end">84%</text><line x1="44" y1="16.0" x2="506" y2="16.0" class="grid"/><text x="38" y="19.0" class="ytick" text-anchor="end">87%</text><path d="M 44.0,164.0 L 44.0,41.5 L 82.5,66.5 L 121.0,93.8 L 159.5,111.4 L 198.0,33.1 L 236.5,84.7 L 275.0,50.7 L 313.5,70.5 L 352.0,47.4 L 390.5,41.7 L 429.0,116.1 L 467.5,80.8 L 506.0,95.8 L 506.0,164.0 Z" fill="rgba(14,124,123,0.10)" stroke="none"/><line x1="44" y1="93.9" x2="506" y2="93.9" class="ref-target"/><text x="506" y="89.9" class="ref-label" text-anchor="end">target 80%</text><line x1="44" y1="146.9" x2="506" y2="146.9" class="ref-amber"/><polyline fill="none" stroke="#c1841c" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" points="44.0,41.5 82.5,66.5 121.0,93.8 159.5,111.4 198.0,33.1 236.5,84.7 275.0,50.7 313.5,70.5 352.0,47.4 390.5,41.7 429.0,116.1 467.5,80.8 506.0,95.8"/><circle cx="506.0" cy="95.8" r="3.4" fill="#c1841c"/><text x="44.0" y="182" class="xtick" text-anchor="middle">05 Jul</text><text x="275.0" y="182" class="xtick" text-anchor="middle">16 Aug</text><text x="506.0" y="182" class="xtick" text-anchor="middle">27 Sep</text></svg>
+          </div>
+        </div>
+      </article>
+      
+      <article class="bucard">
+        <div class="bucard-top">
+          <div>
+            <h3>Retention</h3>
+            <span class="bu-verdict on-track-improving">On track — improving</span>
+          </div>
+          <div class="bu-score">
+            <span class="n num">93</span>
+            <span class="l">/100 headline</span>
+            <svg viewBox="0 0 132 12" width="132" height="12" class="ragbar" role="img" aria-hidden="true"><rect x="0.0" y="0" width="108.0" height="12" fill="var(--g)" rx="1.5"/><rect x="108.0" y="0" width="24.0" height="12" fill="var(--a)" rx="1.5"/></svg>
+          </div>
+        </div>
+        <p class="bu-readout">SL 82.9% (+2.0 pts WoW), CSAT 88.1%. Improving trend on Service Level, First Contact Resolution and Customer Satisfaction.</p>
+        <div class="bucard-body">
+          <div class="mini">
+            
+            <div class="cell" title="Service Level">
+              <span class="l">SL 20s <span class="tg improving">▲</span></span>
+              <div class="row">
+                <span class="val num">82.9%<span class="wow num">+2.0pt</span></span>
+                <span class="dotb green" title="green"></span>
+              </div>
+            </div>
+            
+            <div class="cell" title="Average Speed of Answer">
+              <span class="l">ASA <span class="tg stable">–</span></span>
+              <div class="row">
+                <span class="val num">27s<span class="wow num">+7s</span></span>
+                <span class="dotb green" title="green"></span>
+              </div>
+            </div>
+            
+            <div class="cell" title="Abandonment Rate">
+              <span class="l">Aband. <span class="tg stable">–</span></span>
+              <div class="row">
+                <span class="val num">4.7%<span class="wow num">+0.6pt</span></span>
+                <span class="dotb green" title="green"></span>
+              </div>
+            </div>
+            
+            <div class="cell" title="Average Handle Time">
+              <span class="l">AHT <span class="tg stable">–</span></span>
+              <div class="row">
+                <span class="val num">353s<span class="wow num">-6s</span></span>
+                <span class="dotb green" title="green"></span>
+              </div>
+            </div>
+            
+            <div class="cell" title="First Contact Resolution">
+              <span class="l">FCR <span class="tg improving">▲</span></span>
+              <div class="row">
+                <span class="val num">79.3%<span class="wow num">+1.1pt</span></span>
+                <span class="dotb green" title="green"></span>
+              </div>
+            </div>
+            
+            <div class="cell" title="Customer Satisfaction">
+              <span class="l">CSAT <span class="tg improving">▲</span></span>
+              <div class="row">
+                <span class="val num">88.1%<span class="wow num">+1.6pt</span></span>
+                <span class="dotb green" title="green"></span>
+              </div>
+            </div>
+            
+            <div class="cell" title="Cost per Contact">
+              <span class="l">CPC <span class="tg stable">–</span></span>
+              <div class="row">
+                <span class="val num">AED 19.73<span class="wow num">-0.57</span></span>
+                <span class="dotb amber" title="amber"></span>
+              </div>
+            </div>
+            
+            <div class="cell" title="Schedule Adherence">
+              <span class="l">Adher. <span class="tg stable">–</span></span>
+              <div class="row">
+                <span class="val num">89.4%<span class="wow num">-2.8pt</span></span>
+                <span class="dotb amber" title="amber"></span>
+              </div>
+            </div>
+            
+          </div>
+          <div class="bu-chart">
+            <div class="cap">Service Level · 13 weeks vs 80% target</div>
+            <svg viewBox="0 0 520 190" class="linechart" role="img" aria-label="Retention Service Level, 13 weeks"><line x1="44" y1="164.0" x2="506" y2="164.0" class="grid"/><text x="38" y="167.0" class="ytick" text-anchor="end">73%</text><line x1="44" y1="127.0" x2="506" y2="127.0" class="grid"/><text x="38" y="130.0" class="ytick" text-anchor="end">77%</text><line x1="44" y1="90.0" x2="506" y2="90.0" class="grid"/><text x="38" y="93.0" class="ytick" text-anchor="end">80%</text><line x1="44" y1="53.0" x2="506" y2="53.0" class="grid"/><text x="38" y="56.0" class="ytick" text-anchor="end">83%</text><line x1="44" y1="16.0" x2="506" y2="16.0" class="grid"/><text x="38" y="19.0" class="ytick" text-anchor="end">87%</text><path d="M 44.0,164.0 L 44.0,76.9 L 82.5,146.9 L 121.0,121.1 L 159.5,129.7 L 198.0,101.1 L 236.5,86.7 L 275.0,104.7 L 313.5,113.4 L 352.0,33.1 L 390.5,79.8 L 429.0,72.5 L 467.5,79.6 L 506.0,57.2 L 506.0,164.0 Z" fill="rgba(14,124,123,0.10)" stroke="none"/><line x1="44" y1="90.2" x2="506" y2="90.2" class="ref-target"/><text x="506" y="86.2" class="ref-label" text-anchor="end">target 80%</text><line x1="44" y1="146.4" x2="506" y2="146.4" class="ref-amber"/><polyline fill="none" stroke="#2f8f5b" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round" points="44.0,76.9 82.5,146.9 121.0,121.1 159.5,129.7 198.0,101.1 236.5,86.7 275.0,104.7 313.5,113.4 352.0,33.1 390.5,79.8 429.0,72.5 467.5,79.6 506.0,57.2"/><circle cx="506.0" cy="57.2" r="3.4" fill="#2f8f5b"/><text x="44.0" y="182" class="xtick" text-anchor="middle">05 Jul</text><text x="275.0" y="182" class="xtick" text-anchor="middle">16 Aug</text><text x="506.0" y="182" class="xtick" text-anchor="middle">27 Sep</text></svg>
+          </div>
+        </div>
+      </article>
+      
+    </div>
+  </section>
+
+  <!-- 4 · WATCH ITEMS -->
+  <section id="s4">
+    <div class="sec-head">
+      <span class="sec-no">04</span>
+      <h2>Watch items &amp; anomalies</h2>
+      <span class="sub">11 statistical anomalies · z &gt; 2.5 vs trailing 8-week mean</span>
+    </div>
+    
+    <div class="watchlist">
+      
+      <div class="witem high">
+        <span class="sev">high</span>
+        <div class="wt">Technical Support — Service Level on a sustained adverse trend (82.8% → 59.3%)</div>
+        <div class="wd">Slope -1.81%/week across the quarter (R²=0.68); now rated RED against a 80.0% target.</div>
+      </div>
+      
+      <div class="witem high">
+        <span class="sev">high</span>
+        <div class="wt">Technical Support — Schedule Adherence on a sustained adverse trend (93.9% → 84.1%)</div>
+        <div class="wd">Slope -0.65%/week across the quarter (R²=0.62); now rated RED against a 90.0% target.</div>
+      </div>
+      
+      <div class="witem medium">
+        <span class="sev">medium</span>
+        <div class="wt">Technical Support — Average Speed of Answer jumped to 84s (w/e 27 Sep)</div>
+        <div class="wd">3.4σ from the trailing 8-week mean of 36s, +134% week-on-week.</div>
+      </div>
+      
+      <div class="witem medium">
+        <span class="sev">medium</span>
+        <div class="wt">Collections — Average Handle Time on a sustained adverse trend (365s → 391s)</div>
+        <div class="wd">Slope +3.10s/week across the quarter (R²=0.53); now rated AMBER against a 360s target.</div>
+      </div>
+      
+      <div class="witem medium">
+        <span class="sev">medium</span>
+        <div class="wt">Consumer Care — Repeat Contact Rate jumped to 22.8% (w/e 27 Sep)</div>
+        <div class="wd">1.5σ from the trailing 8-week mean of 20.2%, +13% week-on-week.</div>
+      </div>
+      
+    </div>
+    
+  </section>
+
+  <!-- 5 · RECOMMENDATIONS -->
+  <section id="s5">
+    <div class="sec-head">
+      <span class="sec-no">05</span>
+      <h2>Recommended actions</h2>
+      <span class="sub">Owner and horizon assigned · tracked to next review</span>
+    </div>
+    <div class="recs">
+      
+      <div class="rec">
+        <h4>Stand up a Technical Support service-recovery cell</h4>
+        <p>SL has fallen to 59.3% and abandonment to 10.9% in the last three weeks. Root-cause the split between attrition and the platform incident, add interim licensed overflow, and report daily until SL is back above target for five consecutive days.</p>
+        <div class="meta">
+          <span class="tag">Owner: <b>Head of Technical Support / WFM</b></span>
+          <span class="tag">Horizon: <b>This week</b></span>
+        </div>
+      </div>
+      
+      <div class="rec">
+        <h4>Break the Collections AHT drift</h4>
+        <p>AHT has risen 27s across the quarter (+3.1s/week) with no matching FCR gain — a coaching or process signal, not demand. Call-listen the longest 10% of contacts, refresh the disclosure script, and set a weekly AHT ceiling per team.</p>
+        <div class="meta">
+          <span class="tag">Owner: <b>Collections Ops Manager / QA</b></span>
+          <span class="tag">Horizon: <b>2–4 weeks</b></span>
+        </div>
+      </div>
+      
+      <div class="rec">
+        <h4>Move all units onto the standardised review template</h4>
+        <p>This pack is generated from one KPI definition file and one layout. Retiring the five bespoke unit decks removes ~2 analyst-days per week and makes cross-unit comparison automatic.</p>
+        <div class="meta">
+          <span class="tag">Owner: <b>Service Review & Insights</b></span>
+          <span class="tag">Horizon: <b>30 days</b></span>
+        </div>
+      </div>
+      
+    </div>
+  </section>
+
+  <!-- 6 · APPENDIX -->
+  <section id="s6">
+    <div class="sec-head">
+      <span class="sec-no">06</span>
+      <h2>Appendix — standardised KPI definitions</h2>
+      <span class="sub">Single source of truth · applied identically to every unit</span>
+    </div>
+    <div class="tablecard scroll-x">
+      <table class="defs">
+        <colgroup><col class="c-kpi"><col class="c-def"><col class="c-tgt"><col class="c-rag"></colgroup>
+        <thead><tr><th>KPI</th><th>Definition</th><th>Target</th><th>RAG rule</th></tr></thead>
+        <tbody>
+          
+          <tr>
+            <td>Service Level</td>
+            <td>Percentage of voice contacts answered within 20 seconds. Primary access commitment reported to the Board.
+</td>
+            <td class="tgt">80.0%</td>
+            <td class="tgt">green ≥ 80.0% · red &lt; 75.0%</td>
+          </tr>
+          
+          <tr>
+            <td>Average Speed of Answer</td>
+            <td>Mean time a caller waits in queue before connecting to an agent, including IVR-to-queue transfer time.
+</td>
+            <td class="tgt">30s</td>
+            <td class="tgt">green ≤ 30s · red &gt; 45s</td>
+          </tr>
+          
+          <tr>
+            <td>Abandonment Rate</td>
+            <td>Percentage of queued voice contacts that disconnect before reaching an agent. Excludes calls abandoned in under 5 seconds.
+</td>
+            <td class="tgt">5.0%</td>
+            <td class="tgt">green ≤ 5.0% · red &gt; 8.0%</td>
+          </tr>
+          
+          <tr>
+            <td>Average Handle Time</td>
+            <td>Talk time + hold time + after-call work per handled contact. Movement is read alongside FCR to avoid rewarding rushed calls.
+</td>
+            <td class="tgt">360s</td>
+            <td class="tgt">green ≤ 360s · red &gt; 400s</td>
+          </tr>
+          
+          <tr>
+            <td>First Contact Resolution</td>
+            <td>Percentage of contacts with no related repeat contact from the same customer within 7 calendar days.
+</td>
+            <td class="tgt">78.0%</td>
+            <td class="tgt">green ≥ 78.0% · red &lt; 72.0%</td>
+          </tr>
+          
+          <tr>
+            <td>Customer Satisfaction</td>
+            <td>Percentage of post-contact survey respondents scoring the interaction 4 or 5 out of 5.
+</td>
+            <td class="tgt">85.0%</td>
+            <td class="tgt">green ≥ 85.0% · red &lt; 80.0%</td>
+          </tr>
+          
+          <tr>
+            <td>Repeat Contact Rate</td>
+            <td>Percentage of contacts followed by a further contact from the same customer within 7 days. Inverse lens on FCR.
+</td>
+            <td class="tgt">20.0%</td>
+            <td class="tgt">green ≤ 20.0% · red &gt; 25.0%</td>
+          </tr>
+          
+          <tr>
+            <td>Occupancy</td>
+            <td>Share of logged-in time spent in contact-related work. Below 80% signals over-staffing; above 90% signals burnout / shrinkage risk.
+</td>
+            <td class="tgt">80–90%</td>
+            <td class="tgt">green inside band</td>
+          </tr>
+          
+          <tr>
+            <td>Schedule Adherence</td>
+            <td>Percentage of scheduled on-phone time the agent was actually available, within a 5-minute tolerance.
+</td>
+            <td class="tgt">90.0%</td>
+            <td class="tgt">green ≥ 90.0% · red &lt; 85.0%</td>
+          </tr>
+          
+          <tr>
+            <td>Forecast Accuracy</td>
+            <td>1 - MAPE of the weekly volume forecast against actual offered contacts. Drives roster reliability.
+</td>
+            <td class="tgt">92.0%</td>
+            <td class="tgt">green ≥ 92.0% · red &lt; 88.0%</td>
+          </tr>
+          
+          <tr>
+            <td>Cost per Contact</td>
+            <td>Fully-loaded contact centre operating cost divided by handled contacts for the period.
+</td>
+            <td class="tgt">AED 18.00</td>
+            <td class="tgt">green ≤ AED 18.00 · red &gt; AED 21.00</td>
+          </tr>
+          
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <div class="foot">
+    <span>Group Contact Centre — Quarterly Service Review · Q3 2026 (13 weeks to 27 Sep 2026) · Confidential — internal governance use</span>
+    <span class="gen">Auto-generated by the Service Review &amp; Insights pipeline on 01 September 2026, 09:13. Data in this POC is synthetic.</span>
+  </div>
+
+</div>
+</body>
+</html>

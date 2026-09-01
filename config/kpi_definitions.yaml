@@ -1,0 +1,194 @@
+# =====================================================================
+#  STANDARDISED SERVICE-REVIEW KPI MODEL
+#  One definition, one target, one RAG rule per metric — applied
+#  identically to every business unit so review packs are comparable.
+#  This file is the single source of truth the pipeline reads.
+# =====================================================================
+
+review:
+  title: "Group Contact Centre — Quarterly Service Review"
+  period_label: "Q3 2026 (13 weeks to 27 Sep 2026)"
+  prepared_for: "Group COO / Operations Board"
+  prepared_by: "Service Review & Insights"
+  currency: "AED"
+  # weeks of history to treat as the "current quarter" window
+  quarter_weeks: 13
+  # trailing weeks used as the baseline for anomaly detection
+  anomaly_baseline_weeks: 8
+  # |z| above this vs the trailing baseline = flagged anomaly
+  anomaly_z_threshold: 2.5
+  # abs. week-on-week % move above this = flagged step change
+  step_change_pct: 15.0
+
+# ---------------------------------------------------------------------
+#  KPI catalogue
+#  direction : higher_better | lower_better | band
+#  rag       : green if better-than-or-equal to target,
+#              amber between target and `amber`, red beyond `amber`
+#              (band: green inside [band_low, band_high])
+# ---------------------------------------------------------------------
+kpis:
+  - key: service_level
+    label: "Service Level"
+    short: "SL 20s"
+    unit: "%"
+    fmt: "{:.1f}%"
+    direction: higher_better
+    target: 80
+    amber: 75
+    category: "Access & Responsiveness"
+    headline: true
+    definition: >
+      Percentage of voice contacts answered within 20 seconds.
+      Primary access commitment reported to the Board.
+
+  - key: asa
+    label: "Average Speed of Answer"
+    short: "ASA"
+    unit: "s"
+    fmt: "{:.0f}s"
+    direction: lower_better
+    target: 30
+    amber: 45
+    category: "Access & Responsiveness"
+    headline: true
+    definition: >
+      Mean time a caller waits in queue before connecting to an agent,
+      including IVR-to-queue transfer time.
+
+  - key: abandon_rate
+    label: "Abandonment Rate"
+    short: "Aband."
+    unit: "%"
+    fmt: "{:.1f}%"
+    direction: lower_better
+    target: 5
+    amber: 8
+    category: "Access & Responsiveness"
+    headline: true
+    definition: >
+      Percentage of queued voice contacts that disconnect before
+      reaching an agent. Excludes calls abandoned in under 5 seconds.
+
+  - key: aht
+    label: "Average Handle Time"
+    short: "AHT"
+    unit: "s"
+    fmt: "{:.0f}s"
+    direction: lower_better
+    target: 360
+    amber: 400
+    category: "Efficiency & Cost"
+    headline: true
+    definition: >
+      Talk time + hold time + after-call work per handled contact.
+      Movement is read alongside FCR to avoid rewarding rushed calls.
+
+  - key: fcr
+    label: "First Contact Resolution"
+    short: "FCR"
+    unit: "%"
+    fmt: "{:.1f}%"
+    direction: higher_better
+    target: 78
+    amber: 72
+    category: "Quality & Outcome"
+    headline: true
+    definition: >
+      Percentage of contacts with no related repeat contact from the
+      same customer within 7 calendar days.
+
+  - key: csat
+    label: "Customer Satisfaction"
+    short: "CSAT"
+    unit: "%"
+    fmt: "{:.1f}%"
+    direction: higher_better
+    target: 85
+    amber: 80
+    category: "Quality & Outcome"
+    headline: true
+    definition: >
+      Percentage of post-contact survey respondents scoring the
+      interaction 4 or 5 out of 5.
+
+  - key: repeat_rate
+    label: "Repeat Contact Rate"
+    short: "Repeat"
+    unit: "%"
+    fmt: "{:.1f}%"
+    direction: lower_better
+    target: 20
+    amber: 25
+    category: "Quality & Outcome"
+    headline: false
+    definition: >
+      Percentage of contacts followed by a further contact from the
+      same customer within 7 days. Inverse lens on FCR.
+
+  - key: occupancy
+    label: "Occupancy"
+    short: "Occ."
+    unit: "%"
+    fmt: "{:.1f}%"
+    direction: band
+    band_low: 80
+    band_high: 90
+    target: 85
+    category: "Efficiency & Cost"
+    headline: false
+    definition: >
+      Share of logged-in time spent in contact-related work. Below 80%
+      signals over-staffing; above 90% signals burnout / shrinkage risk.
+
+  - key: adherence
+    label: "Schedule Adherence"
+    short: "Adher."
+    unit: "%"
+    fmt: "{:.1f}%"
+    direction: higher_better
+    target: 90
+    amber: 85
+    category: "Efficiency & Cost"
+    headline: false
+    definition: >
+      Percentage of scheduled on-phone time the agent was actually
+      available, within a 5-minute tolerance.
+
+  - key: forecast_accuracy
+    label: "Forecast Accuracy"
+    short: "Fcst Acc."
+    unit: "%"
+    fmt: "{:.1f}%"
+    direction: higher_better
+    target: 92
+    amber: 88
+    category: "Planning"
+    headline: false
+    definition: >
+      1 - MAPE of the weekly volume forecast against actual offered
+      contacts. Drives roster reliability.
+
+  - key: cost_per_contact
+    label: "Cost per Contact"
+    short: "CPC"
+    unit: "AED"
+    fmt: "AED {:.2f}"
+    direction: lower_better
+    target: 18
+    amber: 21
+    category: "Efficiency & Cost"
+    headline: true
+    definition: >
+      Fully-loaded contact centre operating cost divided by handled
+      contacts for the period.
+
+# ---------------------------------------------------------------------
+#  Business units in scope — order controls report order
+# ---------------------------------------------------------------------
+business_units:
+  - "Consumer Care"
+  - "SME Desk"
+  - "Technical Support"
+  - "Collections"
+  - "Retention"

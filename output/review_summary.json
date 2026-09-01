@@ -1,0 +1,32 @@
+{
+  "generated_at": "2026-09-01T09:13:26",
+  "period": "Q3 2026 (13 weeks to 27 Sep 2026)",
+  "group": {
+    "service_level": 77.85,
+    "asa": 35.8,
+    "abandon_rate": 5.81,
+    "csat": 84.78,
+    "cost_per_contact": 20.01,
+    "quarter_contacts": 631924
+  },
+  "unit_scores": {
+    "Consumer Care": 78.6,
+    "SME Desk": 92.9,
+    "Technical Support": 35.7,
+    "Collections": 71.4,
+    "Retention": 92.9
+  },
+  "anomaly_count": 11,
+  "watch_items": [
+    "Technical Support \u2014 Service Level on a sustained adverse trend (82.8% \u2192 59.3%)",
+    "Technical Support \u2014 Schedule Adherence on a sustained adverse trend (93.9% \u2192 84.1%)",
+    "Technical Support \u2014 Average Speed of Answer jumped to 84s (w/e 27 Sep)",
+    "Collections \u2014 Average Handle Time on a sustained adverse trend (365s \u2192 391s)",
+    "Consumer Care \u2014 Repeat Contact Rate jumped to 22.8% (w/e 27 Sep)"
+  ],
+  "recommendations": [
+    "Stand up a Technical Support service-recovery cell",
+    "Break the Collections AHT drift",
+    "Move all units onto the standardised review template"
+  ]
+}
