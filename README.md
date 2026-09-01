@@ -75,12 +75,27 @@ the YAML — they are meant to be argued about and tuned with the business.
 ## Running it
 
 ```bash
-pip install pandas numpy pyyaml jinja2
-python src/generate_data.py        # writes data/weekly_metrics.csv (synthetic)
-python src/build_review_pack.py     # writes output/service_review_pack.html + .json
+pip install -r requirements.txt
+python build.py                     # generate data + build output/service_review_pack.html + .json
 ```
 
 No API keys, no network calls, no database. Python 3.10+.
+
+### Interactive dashboard (Streamlit)
+
+```bash
+streamlit run streamlit_app.py
+```
+
+Same engine (`analytics.py` + `narrative.py`), presented as a navigable
+dashboard: headline KPI tiles, RAG scorecard, per-unit drill-down, the anomaly
+watch list, recommended actions, and an embedded copy of the printable board
+pack with a download button.
+
+**Hosting on Streamlit Community Cloud:** push this repo to GitHub, then at
+[share.streamlit.io](https://share.streamlit.io) → *New app* → pick this repo
+and `streamlit_app.py` as the entry point. `requirements.txt` and
+`.streamlit/config.toml` are already set up; no secrets needed.
 
 ### To point it at real data
 
@@ -100,6 +115,8 @@ src/narrative.py              Rules-based executive narrative + recommendations
 src/charts.py                 Inline-SVG sparklines and trend charts
 src/build_review_pack.py      Orchestrator — renders the HTML pack + JSON summary
 src/templates/review_pack.html.j2   The standardised pack layout
+build.py                      One command: generate data + build the pack
+streamlit_app.py              Interactive dashboard over the same engine
 docs/APPROACH_FIRST_90_DAYS.md      How I would run this function for real
 output/                       Generated pack + summary
 ```

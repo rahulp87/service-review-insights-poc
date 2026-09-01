@@ -186,15 +186,24 @@ def _signed_kpi(r, delta: float) -> str:
     return f"{delta:+.1f}"
 
 
-def main() -> None:
-    ctx = build_context()
+def render_pack_html(ctx: dict | None = None) -> tuple[str, dict]:
+    """Render the review pack to an HTML string. Returns (html, ctx).
+
+    Pure: writes nothing to disk. Used by the CLI (`main`) and by the
+    Streamlit app so both share one rendering path.
+    """
+    ctx = ctx or build_context()
     env = Environment(
         loader=FileSystemLoader(str(TPL_DIR)),
         autoescape=select_autoescape(["html"]),
     )
     env.filters["comma"] = lambda v: f"{v:,}"
     tpl = env.get_template("review_pack.html.j2")
-    html = tpl.render(**ctx)
+    return tpl.render(**ctx), ctx
+
+
+def main() -> None:
+    html, ctx = render_pack_html()
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     (OUT_DIR / "service_review_pack.html").write_text(html, encoding="utf-8")
