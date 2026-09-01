@@ -198,6 +198,8 @@ def main() -> None:
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)
     (OUT_DIR / "service_review_pack.html").write_text(html, encoding="utf-8")
+    # index.html so static hosts (e.g. Vercel) serve the pack at "/"
+    (OUT_DIR / "index.html").write_text(html, encoding="utf-8")
     (OUT_DIR / "review_summary.json").write_text(
         json.dumps(ctx["summary_json"], indent=2), encoding="utf-8"
     )
@@ -211,6 +213,7 @@ def main() -> None:
     (OUT_DIR / "artifact_body.html").write_text(body.strip() + "\n", encoding="utf-8")
 
     print(f"wrote {OUT_DIR / 'service_review_pack.html'}  ({len(html):,} bytes)")
+    print(f"wrote {OUT_DIR / 'index.html'}")
     print(f"wrote {OUT_DIR / 'review_summary.json'}")
     print(f"wrote {OUT_DIR / 'artifact_body.html'}")
     print(f"  anomalies flagged : {ctx['anomaly_count']}")
